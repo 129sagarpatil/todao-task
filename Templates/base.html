@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do App</title>
+</head>
+<body style="background-color:DarkSlateGray;">
+     <!--project on TO-DO App-->
+      <h1 align="centre">To-Do App</h1>
+      <form action="/add" method = "POST">
+          <div align="centre">
+            <label id="title">To-Do Title</label>
+            <input type="text" name="title" placeholder="Enter to-do...">
+            <br><br>
+            <button type="submit" style="background-color:GreenYellow; border-color:red; color:indigo">ADD</button>
+          </div>
+      </form>
+<h1>All Task List</h1>
+     {% for todo in todo_list %}
+     <div align="centre;">
+         <p style="colour:violet"> {{ todo.id }} | {{ todo.title }} </p>
+
+        {% if todo.complete == False %}
+                 <span>Status - Pending</span>
+        {% else %}
+                 <span>Status - Completed</span>
+        {% endif %}
+
+
+<!--         <a style="background-color:GreenYellow; border-color:red; color:indigo" href="/update/{{ todo.id }}">Update</a> |-->
+<!--         <a style="background-color:GreenYellow; border-color:red; color:indigo" href="/delete/{{ todo.id }}">Delete</a>-->
+     </div>
+     {% endfor %}
+
+<h1>Pending Tasks</h1>
+     {% for todo in todo_list %}
+    {% if todo.complete == False %}
+
+     <div align="centre;">
+         <p style="colour:violet"> {{ todo.id }} | {{ todo.title }} </p>
+         <a style="background-color:GreenYellow; border-color:red; color:indigo" href="/update/{{ todo.id }}">Complete</a> |
+         <a style="background-color:GreenYellow; border-color:red; color:indigo" href="/delete/{{ todo.id }}">Delete</a>
+              </div>
+        {% endif %}
+     {% endfor %}
+
+<h1>Completed Tasks</h1>
+     {% for todo in todo_list %}
+    {% if todo.complete == True %}
+
+     <div align="centre;">
+         <p style="colour:violet"> {{ todo.id }} | {{ todo.title }} </p>
+         <a style="background-color:GreenYellow; border-color:red; color:indigo" href="/update/{{ todo.id }}">Un-complete</a> |
+         <a style="background-color:GreenYellow; border-color:red; color:indigo" href="/delete/{{ todo.id }}">Delete</a>
+              </div>
+        {% endif %}
+     {% endfor %}
+
+</body>
+</html>
